@@ -16,6 +16,113 @@
   font-display: swap;
 }
 
+/*
+
+First attempt at colour scheme:
+
+:root[data-theme="light"] {
+  --text: hsl(0, 0%, 5%);
+  --background: hsl(20, 7%, 92%);
+  --primary: hsl(31, 100%, 88%);
+  --secondary: hsl(32, 69%, 71%);
+  --accent: hsl(32, 91%, 62%);
+}
+:root[data-theme="dark"] {
+  --text: hsl(0, 0%, 95%);
+  --background: hsl(20, 8%, 8%);
+  --primary: hsl(32, 100%, 12%);
+  --secondary: hsl(32, 69%, 29%);
+  --accent: hsl(32, 91%, 38%);
+}
+
+2nd attempt (better):
+
+:root[data-theme="light"] {
+  --text: hsl(34, 44%, 7%);
+  --background: hsl(31, 100%, 88%);
+  --primary: hsl(33, 59%, 52%);
+  --secondary: hsl(33, 66%, 70%);
+  --accent: hsl(33, 74%, 61%);
+}
+:root[data-theme="dark"] {
+  --text: hsl(34, 44%, 93%);
+  --background: hsl(31, 100%, 12%);
+  --primary: hsl(33, 59%, 48%);
+  --secondary: hsl(33, 66%, 30%);
+  --accent: hsl(33, 74%, 39%);
+}
+
+3rd attempt:
+
+:root[data-theme="light"] {
+  --text: hsl(30, 17%, 7%);
+  --background: hsl(31, 100%, 88%);
+  --primary: hsl(34, 73%, 53%);
+  --secondary: hsl(31, 59%, 71%);
+  --accent: hsl(31, 73%, 60%);
+}
+:root[data-theme="dark"] {
+  --text: hsl(30, 17%, 93%);
+  --background: hsl(31, 100%, 12%);
+  --primary: hsl(34, 73%, 47%);
+  --secondary: hsl(31, 59%, 29%);
+  --accent: hsl(31, 73%, 40%);
+}
+
+4th attempt::after
+
+:root[data-theme="light"] {
+  --text: hsl(30, 17%, 7%);
+  --background: hsl(31, 100%, 88%);
+  --primary: hsl(34, 73%, 53%);
+  --secondary: hsl(31, 59%, 71%);
+  --accent: hsl(31, 73%, 60%);
+}
+:root[data-theme="dark"] {
+  --text: hsl(30, 17%, 93%);
+  --background: hsl(31, 100%, 12%);
+  --primary: hsl(34, 73%, 47%);
+  --secondary: hsl(31, 59%, 29%);
+  --accent: hsl(31, 73%, 40%);
+}
+
+5th attempt:
+
+:root[data-theme="light"] {
+  --text: hsl(33, 39%, 9%);
+  --background: hsl(34, 53%, 94%);
+  --primary: hsl(34, 73%, 53%);
+  --secondary: hsl(31, 59%, 71%);
+  --accent: hsl(31, 73%, 60%);
+}
+:root[data-theme="dark"] {
+  --text: hsl(33, 39%, 91%);
+  --background: hsl(34, 53%, 6%);
+  --primary: hsl(34, 73%, 47%);
+  --secondary: hsl(31, 59%, 29%);
+  --accent: hsl(31, 73%, 40%);
+}
+
+Final colour scheme (which is the one from above):
+
+:root[data-theme="light"] {
+  --text: hsl(33, 39%, 9%);
+  --background: hsl(34, 53%, 94%);
+  --primary: hsl(34, 73%, 53%);
+  --secondary: hsl(31, 59%, 71%);
+  --accent: hsl(31, 73%, 60%);
+}
+:root[data-theme="dark"] {
+  --text: hsl(33, 39%, 91%);
+  --background: hsl(34, 53%, 6%);
+  --primary: hsl(34, 73%, 47%);
+  --secondary: hsl(31, 59%, 29%);
+  --accent: hsl(31, 73%, 40%);
+}
+
+*/
+
+
 html,
 body,
 #root {
@@ -29,12 +136,18 @@ body {
 }
 
 body {
+  --text: hsl(33, 39%, 9%);
+  --background: hsl(34, 53%, 94%);
+  --primary: hsl(34, 73%, 53%);
+  --secondary: hsl(31, 59%, 71%);
+  --accent: hsl(31, 73%, 60%);
+  
   font-family: "Satoshi", sans-serif;
   font-weight: 400;
 
   width: 100%;
   min-height: 100%;
-  background-color: hsl(from #ffe4c4 h s 90%);
+  background-color: var(--background);
 }
 
 #root {
@@ -87,15 +200,13 @@ p {
   margin-block: 0;
 }
 
-/* h1, h2, h3, h4, h5, h6 {
-  margin-inline-start: -0.085em;
-} */
+h1, h2, h3, h4, h5, h6 {
+  margin-inline-start: -0.055em;
+}
 
 em,
 .italic {
   font-style: italic; /* uses Satoshi-VariableItalic */
 }
 
-h1 {
-  font-weight: 700; /* same file, different weight on the wght axis */
-}
+
