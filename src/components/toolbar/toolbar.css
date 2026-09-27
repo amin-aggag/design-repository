@@ -1,0 +1,10 @@
+.toolbar {
+    position: sticky;
+    bottom: 16px;
+    width: min(90%, 750px);
+    margin-inline: auto;
+    height: 64px;
+
+    display: flex;
+    gap: 16px;
+}

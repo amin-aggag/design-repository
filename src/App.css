@@ -141,13 +141,22 @@ body {
   --primary: hsl(34, 73%, 53%);
   --secondary: hsl(31, 59%, 71%);
   --accent: hsl(31, 73%, 60%);
-  
+
   font-family: "Satoshi", sans-serif;
   font-weight: 400;
+
+  box-sizing: border-box;
 
   width: 100%;
   min-height: 100%;
   background-color: var(--background);
+}
+
+button {
+  margin: 0;
+  border: unset;
+  background: unset;
+  outline: unset;
 }
 
 #root {
