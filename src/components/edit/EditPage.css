@@ -56,6 +56,11 @@
         grid-template-rows: unset;
         margin-inline: 16px;
     }
+
+    @media (max-width: 450px) {
+        grid-template-rows: auto 1fr;
+        grid-template-columns: unset;
+    }
 }
 
 .image-title {
@@ -74,6 +79,9 @@
     font-size: var(--fs-base);
     border-radius: 32px;
     corner-shape: squircle;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-color: hsla(from var(--secondary) h s l / 50%) transparent;
 }
 
 .back-button {

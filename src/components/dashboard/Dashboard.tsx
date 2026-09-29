@@ -45,6 +45,7 @@ export function Dashboard() {
               height: "auto",
               width: "auto",
               backgroundColor: "hsl(from var(--secondary) h s l)",
+              paddingTop: "32px",
               borderRadius: "16px",
               ...({ cornerShape: "squircle" } as React.CSSProperties),
             }}
