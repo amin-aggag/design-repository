@@ -1,15 +1,24 @@
+import { useNavigate } from "react-router";
 import { PlusIcon } from "../icons/PlusIcon";
 import { SettingsIcon } from "../icons/SettingsIcon";
 import "./Dashboard.css";
 
 export function Dashboard() {
+  const navigate = useNavigate();
   return (
     <div>
-      <div className="top-bar" style={{ margin: "2rem", display: "flex", justifyContent: "space-between" }}>
-              <h2>Design Repository</h2>
-              <div className="settings-icon">
-                <SettingsIcon/>
-              </div>
+      <div
+        className="top-bar"
+        style={{
+          margin: "2rem",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <h2>Design Repository</h2>
+        <div className="settings-icon">
+          <SettingsIcon />
+        </div>
       </div>
       <div className="recents" style={{ margin: "2rem" }}>
         <h3>Recent designs</h3>
@@ -39,14 +48,15 @@ export function Dashboard() {
               borderRadius: "16px",
               ...({ cornerShape: "squircle" } as React.CSSProperties),
             }}
+            onClick={() => navigate("/edit")}
           >
             <div style={{ height: "64px", width: "64px", margin: "auto" }}>
-                <PlusIcon />
+              <PlusIcon />
             </div>
             <div
               className="design-name"
               style={{ padding: "16px", paddingTop: "0" }}
-                      >
+            >
               <h4>Add new design</h4>
             </div>
           </div>
@@ -71,7 +81,7 @@ export function Dashboard() {
                   style={{
                     padding: "16px",
                     height: "100%",
-                    width: "calc(100% - 32px)",
+                    width: "100%",
                     objectFit: "cover",
                     borderRadius: "32px",
                     ...({ cornerShape: "squircle" } as React.CSSProperties),
@@ -125,7 +135,7 @@ export function Dashboard() {
                   style={{
                     padding: "16px",
                     height: "100%",
-                    width: "calc(100% - 2rem)",
+                    width: "100%",
                     objectFit: "cover",
                     borderRadius: "32px",
                     ...({ cornerShape: "squircle" } as React.CSSProperties),

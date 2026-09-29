@@ -122,6 +122,11 @@ Final colour scheme (which is the one from above):
 
 */
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 html,
 body,
@@ -145,18 +150,19 @@ body {
   font-family: "Satoshi", sans-serif;
   font-weight: 400;
 
-  box-sizing: border-box;
-
   width: 100%;
   min-height: 100%;
   background-color: var(--background);
 }
 
 button {
-  margin: 0;
+  margin: unset;
   border: unset;
   background: unset;
   outline: unset;
+  height: unset;
+  width: unset;
+  padding: unset;
 }
 
 #root {
