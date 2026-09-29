@@ -21,11 +21,17 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) 300px;
     margin-bottom: 16px;
+
+    @media (max-width: 850px) {
+        grid-template-rows: minmax(0, 1fr) 300px;
+        grid-template-columns: unset;
+        gap: 16px;
+    }
 }
 
 .annotate-image {
     margin-inline: 16px;
-    border-radius: 8px;
+    border-radius: 32px;
     corner-shape: squircle;
     overflow: hidden;
     background: hsla(from var(--primary) h s l / 5%);
@@ -44,13 +50,20 @@
     grid-template-rows: auto 1fr;
     gap: 16px;
     margin-right: 16px;
+
+    @media (max-width: 850px) {
+        grid-template-columns: 1fr auto;
+        grid-template-rows: unset;
+        margin-inline: 16px;
+    }
 }
 
 .image-title {
     background: hsla(from var(--primary) h s l / 5%);
 
     font-size: var(--fs-md);
-    border-radius: 8px;
+    font-weight: 500;
+    border-radius: 32px;
     corner-shape: squircle;
     padding: 16px;
 }
@@ -59,7 +72,7 @@
     padding: 16px;
     background-color: hsla(from var(--primary) h s l / 5%);
     font-size: var(--fs-base);
-    border-radius: 8px;
+    border-radius: 32px;
     corner-shape: squircle;
 }
 
@@ -72,7 +85,7 @@
     display: flex;
     flex-direction: row;
     gap: 8px;
-    background: hsla(from var(--primary) h s l / 5%);
+    background: hsla(from var(--secondary) h s l / 50%);
     margin-block: auto;
 
     transition: all 300ms ease-out;
@@ -81,6 +94,7 @@
         margin-block: auto;
         font-family: "Satoshi", sans-serif;
         font-size: var(--fs-base);
+        font-weight: 500;
     }
 
     svg {

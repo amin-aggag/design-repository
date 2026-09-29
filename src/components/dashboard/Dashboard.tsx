@@ -15,7 +15,7 @@ export function Dashboard() {
           justifyContent: "space-between",
         }}
       >
-        <h2>Design Repository</h2>
+        <h2 style={{marginBlock: "auto"}}>Design Repository</h2>
         <div className="settings-icon">
           <SettingsIcon />
         </div>
