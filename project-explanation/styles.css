@@ -1,0 +1,88 @@
+@font-face {
+  font-family: "Satoshi";
+  src: url("../fonts/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Variable.woff2")
+    format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("../fonts/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-VariableItalic.woff2")
+    format("woff2");
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  --text: hsl(33, 39%, 9%);
+  --background: hsl(34, 53%, 94%);
+  --primary: hsl(34, 73%, 53%);
+  --secondary: hsl(31, 59%, 71%);
+  --accent: hsl(31, 73%, 60%);
+
+  font-family: "Satoshi", sans-serif;
+  font-weight: 400;
+
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--background);
+}
+
+h1, h2, h3, ul, p {
+    width: 65%;
+    margin-inline: auto;
+}
+
+.image-comparison {
+    display: grid;
+    padding: 2px;
+    gap: 2px;
+    background: hsla(from var(--primary) h s l / 20%);
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+
+    img {
+        width: 100%;
+        height: 100%;
+        min-width: 0;
+        object-fit: contain;
+    }
+}
+
+.image-comparison-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px;
+  padding: 2px; /* outer thickness, same as the gap */
+  background: hsla(from var(--primary) h s l / 20%);
+  width: 100%;
+  overflow-y: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    object-fit: cover;
+    display: block;
+  }
+}
