@@ -29,7 +29,6 @@ body {
 
 html,
 body {
-  height: 100%;
   margin: 0;
 }
 
@@ -44,12 +43,13 @@ body {
   font-weight: 400;
 
   width: 100%;
-  min-height: 100%;
+  height: max-content;
   background-color: var(--background);
+  padding-block: 64px;
 }
 
 h1, h2, h3, ul, p {
-    width: 65%;
+    width: 50%;
     margin-inline: auto;
 }
 
