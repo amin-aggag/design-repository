@@ -17,12 +17,19 @@
   padding-left: 0px;
 }
 
+.design-image-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  corner-shape: squircle;
+}
+
 .design-image {
+  display: block;
   height: 100%;
   width: 100%;
   object-fit: cover;
-  border-radius: 16px;
-  corner-shape: squircle;
 }
 
 .design:hover {

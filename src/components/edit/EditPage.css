@@ -55,8 +55,22 @@
     overflow: clip;
 }
 
-.annotate-image .image::view-transition-new(design-image) {
-    border-radius: 16px;
+::view-transition-old(design-image) {
+    animation: 100ms ease-out both design-image-fade-out;
+}
+
+::view-transition-image-pair(design-image) {
+    overflow: clip;
+    animation: design-image-radius 250ms ease both;
+}
+
+@keyframes design-image-fade-out {
+    to { opacity: 0; }
+}
+
+@keyframes design-image-radius {
+    from { border-radius: 16px; }
+    to { border-radius: 0; }
 }
 
 .image-info {
