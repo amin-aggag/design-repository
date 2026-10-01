@@ -122,6 +122,10 @@ Final colour scheme (which is the one from above):
 
 */
 
+@view-transition {
+  navigation: auto;
+}
+
 *,
 *::before,
 *::after {
@@ -154,6 +158,7 @@ body {
   min-height: 100%;
   background-color: var(--background);
 }
+
 
 button {
   margin: unset;

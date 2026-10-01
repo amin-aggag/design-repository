@@ -9,7 +9,7 @@ export function EditPage() {
   return (
     <div className="edit-page">
       <div className="edit-page-nav">
-        <button className="back-button" onClick={() => navigate("/")}>
+        <button className="back-button" onClick={() => navigate("/", { viewTransition: true })}>
           <BackIcon />
           <span>Back</span>
         </button>

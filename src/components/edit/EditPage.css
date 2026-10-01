@@ -35,13 +35,28 @@
     corner-shape: squircle;
     overflow: hidden;
     background: hsla(from var(--primary) h s l / 5%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .annotate-image .image {
-    display: block;
+    view-transition-name: design-image;
     width: 100%;
-    height: 100%;
-    object-fit: contain;
+    height: min-content;
+    transition: border-radius 80ms ease-out;
+    border-radius: 0px;
+}
+
+::view-transition-old(design-image),
+::view-transition-new(design-image) {
+    animation: none;
+    mix-blend-mode: normal;
+    overflow: clip;
+}
+
+.annotate-image .image::view-transition-new(design-image) {
+    border-radius: 16px;
 }
 
 .image-info {

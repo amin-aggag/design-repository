@@ -1,0 +1,25 @@
+.add-new-design {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: auto;
+  background-color: hsl(from var(--secondary) h s l);
+  padding-top: 32px;
+  border-radius: 16px;
+  corner-shape: squircle;
+  transition: all 150ms ease-out;
+
+  &:hover {
+    box-shadow: 0px 4px 8px hsla(from var(--text) h s l / 0.2);
+    cursor: pointer;
+  }
+
+  padding-inline: 16px;
+}
+
+.plus-icon {
+  height: 64px;
+  width: 64px;
+  margin: auto;
+}
