@@ -28,6 +28,7 @@
 }
 
 .settings-icon {
+    view-transition-name: settings-icon;
     height: 42px;
     width: 42px;
     border-radius: 16px;
