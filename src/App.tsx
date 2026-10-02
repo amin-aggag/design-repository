@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "edit",
+    path: "edit/:designId",
     element: <EditPage />,
   },
 ]);

@@ -66,9 +66,14 @@
   animation: design-image-radius 400ms ease both;
 }
 
+:root {
+    --start-radius: 0px;
+    --end-radius: 16px;
+}
+
 ::view-transition-group(design-image) {
     overflow: clip;
-  animation-duration: 400ms;
+    animation-duration: 400ms;
 }
 
 @keyframes design-image-fade-out {
@@ -79,10 +84,10 @@
 
 @keyframes design-image-radius {
   from {
-    border-radius: 16px;
+    border-radius: var(--start-radius);
   }
   to {
-    border-radius: 0;
+    border-radius: var(--end-radius);
   }
 }
 

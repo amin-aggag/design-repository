@@ -1,15 +1,28 @@
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { BackIcon } from "../icons/BackIcon";
 import { SettingsIcon } from "../icons/SettingsIcon";
 import "./EditPage.css";
 
 export function EditPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleBack = () => {
+    const root = document.documentElement;
+    root.style.setProperty('--start-radius', '0px');
+    root.style.setProperty('--end-radius', '8px');
+    
+    if (location.key === "default") {
+      navigate("/", { viewTransition: true });
+    } else {
+      navigate(-1);
+    }
+  };
 
   return (
     <div className="edit-page">
       <div className="edit-page-nav">
-        <button className="back-button" onClick={() => navigate("/", { viewTransition: true })}>
+        <button className="back-button" onClick={handleBack}>
           <BackIcon />
           <span>Back</span>
         </button>

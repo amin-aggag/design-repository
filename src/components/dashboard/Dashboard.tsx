@@ -18,8 +18,8 @@ export function Dashboard() {
           <AddDesignButton/>
           {Array(3)
             .fill(0)
-            .map(() => (
-              <Design/>
+            .map((_, i) => (
+              <Design id={i} origin="recents"/>
             ))}
         </div>
       </div>
@@ -29,8 +29,8 @@ export function Dashboard() {
         <div className="recent-designs-list">
           {Array(10)
             .fill(0)
-            .map(() => (
-              <Design/>
+            .map((_, i) => (
+              <Design id={i} origin="all"/>
             ))}
         </div>
       </div>
