@@ -9,13 +9,21 @@
   /* how far the collapsed history tucks down behind the toolbar */
   --collapsed-tuck: calc(3.5 * var(--default-padding));
 
+  /* extra distance the history hides behind the toolbar when not searching */
+  --hidden-extra-tuck: 12px;
+
   position: absolute;
   z-index: 0;
   width: calc(50% + 2 * var(--hover-zone-size));
   padding: var(--hover-zone-size);
   margin: calc(-1 * var(--hover-zone-size));
+  pointer-events: none;
 
   transition: bottom 200ms ease-out;
+
+  &.is-searching {
+    pointer-events: auto;
+  }
 }
 
 .search-history {
@@ -43,14 +51,14 @@
   }
 }
 
-.search-history-hover-zone:hover .search-history {
+.search-history-hover-zone.is-searching:hover .search-history {
   height: calc-size(auto, size);
 }
 
 .search-history-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 4px;
     padding: 0px;
     margin: 0px;
 
@@ -62,7 +70,7 @@
 .search-history-item {
   height: auto;
   padding: 8px;
-  padding-block: 4px;
+  padding-block: 8px;
   border-radius: 8px;
   corner-shape: squircle;
   width: 100%;
@@ -84,9 +92,13 @@
 
 @media (max-width: 850px) {
   .search-history-hover-zone {
-    bottom: calc(var(--expanded-bottom-narrow-screen) - var(--collapsed-tuck));
+    bottom: calc(var(--expanded-bottom-narrow-screen) - var(--collapsed-tuck) - var(--hidden-extra-tuck));
 
-    &:hover {
+    &.is-searching {
+      bottom: calc(var(--expanded-bottom-narrow-screen) - var(--collapsed-tuck));
+    }
+
+    &.is-searching:hover {
       bottom: var(--expanded-bottom-narrow-screen);
     }
   }
@@ -94,9 +106,13 @@
 
 @media (min-width: 851px) {
   .search-history-hover-zone {
-    bottom: calc(var(--expanded-bottom-wide-screen) - var(--collapsed-tuck));
+    bottom: calc(var(--expanded-bottom-wide-screen) - var(--collapsed-tuck) - var(--hidden-extra-tuck));
 
-    &:hover {
+    &.is-searching {
+      bottom: calc(var(--expanded-bottom-wide-screen) - var(--collapsed-tuck));
+    }
+
+    &.is-searching:hover {
       bottom: var(--expanded-bottom-wide-screen);
     }
   }

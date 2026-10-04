@@ -3,6 +3,8 @@ import React from "react";
 type SearchContextValue = {
   isSearching: boolean;
   setIsSearching: React.Dispatch<React.SetStateAction<boolean>>;
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const SearchContext = React.createContext<SearchContextValue | null>(

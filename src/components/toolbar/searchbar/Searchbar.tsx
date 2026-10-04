@@ -5,7 +5,8 @@ import { Kbd } from "../kbd/Kbd";
 import { useSearch } from "../search-context/searchContext";
 
 export function Searchbar() {
-  const { isSearching, setIsSearching } = useSearch();
+  const { isSearching, setIsSearching, searchQuery, setSearchQuery } =
+    useSearch();
 
   const searchbarRef = React.useRef<HTMLDivElement>(null);
 
@@ -27,13 +28,19 @@ export function Searchbar() {
     const onEscPress = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsSearching(false);
+        setSearchQuery("");
       }
     };
 
     const onPointerDown = (e: PointerEvent) => {
-      if (!searchbarRef.current?.contains(e.target as Node)) {
+      const target = e.target as Element;
+      if (
+        !searchbarRef.current?.contains(target) &&
+        !target.closest(".search-history-hover-zone")
+      ) {
         e.preventDefault();
         setIsSearching(false);
+        setSearchQuery("");
       }
     };
 
@@ -44,7 +51,7 @@ export function Searchbar() {
       document.removeEventListener("keydown", onEscPress);
       document.removeEventListener("pointerdown", onPointerDown);
     };
-  }, [isSearching, setIsSearching]);
+  }, [isSearching, setIsSearching, setSearchQuery]);
 
   return (
     <div
@@ -65,6 +72,8 @@ export function Searchbar() {
             size={10}
             className="search-input"
             placeholder={`Try "smooth orange micro-interaction"`}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             autoFocus
           />
         ) : (
