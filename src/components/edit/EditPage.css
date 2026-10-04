@@ -187,6 +187,9 @@
   height: 100%;
   overflow-y: auto;
   scrollbar-color: hsla(from var(--secondary) h s l / 50%) transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .back-button {
@@ -238,4 +241,17 @@
     background: hsla(from var(--primary) h s l / 5%);
     cursor: pointer;
   }
+}
+
+.image-desc-tags {
+    height: auto;
+    width: 100%;
+    border-radius: 8px;
+    corner-shape: squircle;
+    background: hsla(from var(--primary) h s l / 15%);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px;
 }

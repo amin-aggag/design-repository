@@ -18,7 +18,7 @@ export function Searchbar() {
 
     window.addEventListener("keydown", onCtrlKPress);
     return () => window.removeEventListener("keydown", onCtrlKPress);
-  });
+  }, []);
 
   React.useEffect(() => {
     if (!isSearching) return;
@@ -48,7 +48,7 @@ export function Searchbar() {
   return (
     <div
       className={`searchbar ${isSearching ? "is-searching" : ""}`}
-      onClick={() => setIsSearching((prev) => !prev)}
+      onClick={() => setIsSearching(true)}
       ref={searchbarRef}
     >
       <div className="searchbar-content">
@@ -63,7 +63,7 @@ export function Searchbar() {
             required
             size={10}
             className="search-input"
-            placeholder={`Try "smooth orange micro-animation"`}
+            placeholder={`Try "smooth orange micro-interaction"`}
             autoFocus
           />
         ) : (

@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router";
 import { BackIcon } from "../icons/BackIcon";
 import { SettingsIcon } from "../icons/SettingsIcon";
 import "./EditPage.css";
+import { Tag } from "./tags/Tag";
 
 export function EditPage() {
   const navigate = useNavigate();
@@ -9,9 +10,9 @@ export function EditPage() {
 
   const handleBack = () => {
     const root = document.documentElement;
-    root.style.setProperty('--start-radius', '0px');
-    root.style.setProperty('--end-radius', '8px');
-    
+    root.style.setProperty("--start-radius", "0px");
+    root.style.setProperty("--end-radius", "8px");
+
     if (location.key === "default") {
       navigate("/", { viewTransition: true });
     } else {
@@ -40,16 +41,18 @@ export function EditPage() {
             2026.2
           </span>
           <p className="image-description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo,
-            deleniti quidem ipsa atque iste praesentium quo autem natus quam?
-            Similique ab deserunt architecto adipisci esse quasi error sed
-            consequuntur a.
-          </p>
-          <div className="image-desc-tags">
-            <div>
-              
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo,
+              deleniti quidem ipsa atque iste praesentium quo autem natus quam?
+              Similique ab deserunt architecto adipisci esse quasi error sed
+              consequuntur a.
+            </p>
+            <div className="image-desc-tags">
+              {["Pixelated", "Techy", "Green", "Grids", "Squares"].map((tag, index) => (
+                <Tag tagName={tag} key={index} style={{ "--i": index } as React.CSSProperties} />
+              ))}
             </div>
-          </div>
+          </p>
         </div>
       </div>
     </div>

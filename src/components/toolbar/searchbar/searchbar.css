@@ -58,6 +58,9 @@
 
     transition: width 200ms ease-out;
 
+    position: relative;
+    z-index: 1;
+
     &:hover {
         cursor: pointer;
     }

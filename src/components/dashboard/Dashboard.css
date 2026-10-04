@@ -46,3 +46,7 @@
         cursor: pointer;
     }
 }
+
+h2, h3, h4 {
+  user-select: none;
+}
