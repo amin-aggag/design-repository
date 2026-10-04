@@ -1,0 +1,17 @@
+.kbd {
+    height: auto;
+    width: auto;
+    font-family: inherit;
+    font-size: var(--fs-sm);
+    color: hsl(0 0% 30%);
+    background: hsl(from var(--secondary) h s l / 30%);
+    margin: 8px;
+    padding: 4px;
+    border-radius: 8px;
+    corner-shape: squircle;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}

@@ -1,10 +1,23 @@
 .toolbar {
     position: sticky;
     bottom: 16px;
-    width: min(90%, 750px);
+    width: min(90%, 600px);
     margin-inline: auto;
-    height: 64px;
 
     display: flex;
+    justify-content: center;
     gap: 16px;
+}
+
+@media (max-width: 850px) {
+    .toolbar {
+        height: 64px;
+        width: 90%;
+    }
+}
+
+@media (min-width: 851px) {
+    .toolbar {
+        height: 48px;
+    }
 }

@@ -45,6 +45,11 @@ export function EditPage() {
             Similique ab deserunt architecto adipisci esse quasi error sed
             consequuntur a.
           </p>
+          <div className="image-desc-tags">
+            <div>
+              
+            </div>
+          </div>
         </div>
       </div>
     </div>

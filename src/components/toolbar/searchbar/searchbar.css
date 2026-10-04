@@ -1,8 +1,6 @@
 .search-icon {
-    height: 32px;
-    width: 32px;
-    margin-left: 32px;
     margin-block: auto;
+    transition: height, width 120ms ease-out;
 
     svg {
         stroke: black;
@@ -13,22 +11,78 @@
     font-size: var(--fs-md);
     font-weight: 500;
     margin-block: auto;
+    user-select: none;
+}
+
+@media (max-width: 850px) {
+    .search-text {
+        font-size: var(--fs-md);
+    }
+
+    .search-input {
+        font-size: var(--fs-md);
+    }
+
+    .search-icon {
+        height: 32px;
+        width: 32px;
+    }
+}
+
+@media (min-width: 851px) {
+    .search-text {
+        font-size: var(--fs-base);
+    }
+
+    .search-input {
+        font-size: var(--fs-base);
+    }
+
+    .search-icon {
+        height: 24px;
+        width: 24px;
+    }
 }
 
 .searchbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
+    display: grid;
+    grid-template-columns: 1fr auto;
     background: hsl(from var(--secondary) h s 85%);
     height: 100%;
-    width: 90%;
-    gap: 8px;
+    width: 50%;
+    padding-inline: 32px;
 
     border-radius: 16px;
     corner-shape: squircle;
     box-shadow: 0px 1px 2px hsla(from var(--text) h s l / 0.2);
 
+    transition: width 200ms ease-out;
+
     &:hover {
         cursor: pointer;
     }
+
+    &.is-searching {
+        width: 90%;
+    }
+}
+
+@media (max-width: 850px) {
+    .searchbar {
+        width: 90%;
+    }
+}
+
+.searchbar-content {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.search-input {
+    background: transparent;
+    border: unset;
+    font-family: inherit;
+    width: 100%;
+    outline: unset;
 }

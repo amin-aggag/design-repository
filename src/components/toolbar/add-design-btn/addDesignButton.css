@@ -3,13 +3,23 @@
   border-radius: 16px;
   corner-shape: squircle;
 
-  width: max(10%, 72px);
-
   transition: all 150ms ease-out;
   box-shadow: 0px 1px 2px hsla(from var(--text) h s l / 0.2);
 
   &:hover {
     cursor: pointer;
     box-shadow: 0px 8px 16px hsla(from var(--text) h s l / 0.2);
+  }
+}
+
+@media (max-width: 850px) {
+  .add-design-btn {
+    width: max(10%, 72px);
+  }
+}
+
+@media (min-width: 851px) {
+  .add-design-btn {
+    width: max(10%, 64px);
   }
 }
