@@ -7,6 +7,7 @@
     background: hsl(from var(--secondary) h s l / 30%);
     margin: 8px;
     padding: 4px;
+    padding-inline: 8px;
     border-radius: 8px;
     corner-shape: squircle;
 
