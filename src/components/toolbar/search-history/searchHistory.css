@@ -1,48 +1,78 @@
+.search-history-hover-zone {
+  --default-padding: 8px;
+  --hover-zone-size: 20px;
+
+  /* toolbar height + var(--default-padding) gap */
+  --expanded-bottom-narrow-screen: 72px;
+  --expanded-bottom-wide-screen: 56px;
+
+  /* how far the collapsed history tucks down behind the toolbar */
+  --collapsed-tuck: calc(3.5 * var(--default-padding));
+
+  position: absolute;
+  z-index: 0;
+  width: calc(50% + 2 * var(--hover-zone-size));
+  padding: var(--hover-zone-size);
+  margin: calc(-1 * var(--hover-zone-size));
+
+  transition: bottom 200ms ease-out;
+}
+
 .search-history {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    background: hsl(from var(--secondary) h s 80%);
-    height: 15px;
-    width: 50%;
-    padding-inline: 32px;
-    padding-block: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: hsl(from var(--secondary) h s 80%);
+  height: 15px;
+  width: 100%;
+  padding-inline: 32px;
+  padding-block: 8px;
 
-    border-radius: 16px;
-    corner-shape: squircle;
-    box-shadow: 0px 1px 2px hsla(from var(--text) h s l / 0.2);
+  border-radius: 16px;
+  corner-shape: squircle;
+  box-shadow: 0px 1px 2px hsla(from var(--text) h s l / 0.2);
 
-    transition: all 200ms ease-out;
+  transition: all 200ms ease-out;
 
-    position: absolute;
-    z-index: 0;
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 
-    overflow-y: hidden;
+  overflow-y: hidden;
 
-    &:hover {
-        cursor: pointer;
-    }
+  &:hover {
+    cursor: pointer;
+  }
 
-    &.is-searching {
-        width: 90%;
-    }
+  &.is-searching {
+    width: 90%;
+  }
+}
+
+.search-history-hover-zone:hover .search-history {
+  height: auto;
 }
 
 .search-history-item {
-    height: auto;
-    padding-block: 4px;
-    width: 90%;
+  height: auto;
+  padding-block: 4px;
+  width: 90%;
 }
 
 @media (max-width: 850px) {
-    .search-history {
-        bottom: calc(72px - 3.5 * 8px);
+  .search-history-hover-zone {
+    bottom: calc(var(--expanded-bottom-narrow-screen) - var(--collapsed-tuck));
+
+    &:hover {
+      bottom: var(--expanded-bottom-narrow-screen);
     }
+  }
 }
 
 @media (min-width: 851px) {
-    .search-history {
-        bottom: calc(56px - 3.5 * 8px);
+  .search-history-hover-zone {
+    bottom: calc(var(--expanded-bottom-wide-screen) - var(--collapsed-tuck));
+
+    &:hover {
+      bottom: var(--expanded-bottom-wide-screen);
     }
+  }
 }
