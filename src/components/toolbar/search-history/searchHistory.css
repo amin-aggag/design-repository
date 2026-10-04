@@ -12,17 +12,32 @@
   /* extra distance the history hides behind the toolbar when not searching */
   --hidden-extra-tuck: 12px;
 
+  /* stops the history popping up when the mouse just passes over it */
+  --hover-expand-delay: 80ms;
+
+  /* narrow enough when not searching to stay hidden behind the searchbar */
+  --hidden-width: 10%;
+  --searching-width: 50%;
+  --width-transition-duration: 80ms;
+
   position: absolute;
   z-index: 0;
-  width: calc(50% + 2 * var(--hover-zone-size));
+  width: calc(var(--hidden-width) + 2 * var(--hover-zone-size));
   padding: var(--hover-zone-size);
   margin: calc(-1 * var(--hover-zone-size));
   pointer-events: none;
 
-  transition: bottom 200ms ease-out;
+  transition:
+    bottom 200ms ease-out,
+    width var(--width-transition-duration) ease-out;
 
   &.is-searching {
+    width: calc(var(--searching-width) + 2 * var(--hover-zone-size));
     pointer-events: auto;
+  }
+
+  &.is-searching:hover {
+    transition-delay: var(--hover-expand-delay);
   }
 }
 
@@ -44,7 +59,7 @@
 
   margin-bottom: 8px;
 
-  overflow-y: hidden;
+  overflow: hidden;
 
   &.is-searching {
     width: 90%;
@@ -53,6 +68,7 @@
 
 .search-history-hover-zone.is-searching:hover .search-history {
   height: calc-size(auto, size);
+  transition-delay: var(--hover-expand-delay);
 }
 
 .search-history-list {
