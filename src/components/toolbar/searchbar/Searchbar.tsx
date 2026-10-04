@@ -2,9 +2,10 @@ import React from "react";
 import { SearchIcon } from "../../icons/SearchIcon";
 import "./searchbar.css";
 import { Kbd } from "../kbd/Kbd";
+import { useSearch } from "../search-context/searchContext";
 
 export function Searchbar() {
-  const [isSearching, setIsSearching] = React.useState<boolean>(false);
+  const { isSearching, setIsSearching } = useSearch();
 
   const searchbarRef = React.useRef<HTMLDivElement>(null);
 
@@ -18,7 +19,7 @@ export function Searchbar() {
 
     window.addEventListener("keydown", onCtrlKPress);
     return () => window.removeEventListener("keydown", onCtrlKPress);
-  }, []);
+  }, [setIsSearching]);
 
   React.useEffect(() => {
     if (!isSearching) return;
@@ -43,7 +44,7 @@ export function Searchbar() {
       document.removeEventListener("keydown", onEscPress);
       document.removeEventListener("pointerdown", onPointerDown);
     };
-  }, [isSearching]);
+  }, [isSearching, setIsSearching]);
 
   return (
     <div
