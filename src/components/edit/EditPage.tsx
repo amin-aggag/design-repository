@@ -87,6 +87,7 @@ export function EditPage() {
               key={annotation.id}
               annotation={annotation}
               onMove={(position) => moveAnnotation(annotation.id, position)}
+              isVisible={isViewingAnnotations}
             />
           ))}
           <img

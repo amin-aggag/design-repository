@@ -3,7 +3,7 @@ import type { PointerEvent } from "react";
 import "./annotation.css";
 import { GripHorizontalIcon } from "../../icons/GripHorizontalIcon";
 import { clamp, fitHeightToContent, getMaxPosition } from "./annotationHelpers";
-import { useViewTransitionState } from "react-router";
+import { useParams, useViewTransitionState } from "react-router";
 
 type Point = { x: number; y: number };
 
@@ -21,12 +21,14 @@ export type Annotation = {
 type AnnotationProps = {
   annotation: Annotation;
   onMove: (position: AnnotationPosition) => void;
+  isVisible: boolean;
 };
 
 type DragStart = { pointer: Point; position: AnnotationPosition };
 
-export function Annotation({ annotation, onMove }: AnnotationProps) {
-  const viewTransitionOccurring = useViewTransitionState("/edit");
+export function Annotation({ annotation, onMove, isVisible }: AnnotationProps) {
+  const { designId } = useParams();
+  const viewTransitionOccurring = useViewTransitionState(`/edit/${designId}`);
 
   const annotationRef = useRef<HTMLDivElement>(null);
   const dragStartRef = useRef<DragStart | null>(null);
@@ -39,6 +41,12 @@ export function Annotation({ annotation, onMove }: AnnotationProps) {
     fitHeightToContent(textarea);
     document.fonts.ready.then(() => fitHeightToContent(textarea));
   }, []);
+
+  useLayoutEffect(() => {
+    if (isVisible && textareaRef.current) {
+      fitHeightToContent(textareaRef.current);
+    }
+  }, [isVisible]);
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -68,7 +76,7 @@ export function Annotation({ annotation, onMove }: AnnotationProps) {
 
   return (
     <div
-      className={`annotation ${viewTransitionOccurring ? "with-view-transition" : ""}`}
+      className={`annotation ${isVisible ? "" : "hidden"} ${viewTransitionOccurring ? "with-view-transition" : ""}`}
       ref={annotationRef}
       style={{ top: annotation.position.top, left: annotation.position.left }}
     >
@@ -81,12 +89,14 @@ export function Annotation({ annotation, onMove }: AnnotationProps) {
       >
         <GripHorizontalIcon />
       </div>
-      <textarea
-        className="search-input"
-        ref={textareaRef}
-        defaultValue={annotation.text}
-        onInput={(event) => fitHeightToContent(event.currentTarget)}
-      />
+      <div className="annotation-body">
+        <textarea
+          className="search-input"
+          ref={textareaRef}
+          defaultValue={annotation.text}
+          onInput={(event) => fitHeightToContent(event.currentTarget)}
+        />
+      </div>
     </div>
   );
 }
