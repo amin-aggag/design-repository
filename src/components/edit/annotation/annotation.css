@@ -51,6 +51,7 @@
   interpolate-size: allow-keywords;
   display: grid;
   justify-content: unsafe center;
+  margin-inline: auto;
   overflow: hidden;
   box-sizing: border-box;
   width: var(--total-width);
@@ -61,17 +62,20 @@
   corner-shape: squircle;
   box-shadow: 0px 1px 2px hsla(from var(--text) h s l / 0.2);
   transition:
+    width var(--duration) ease-out,
     height var(--duration) ease-out,
     padding var(--duration) ease-out;
   transition-delay: var(--duration);
 
   @starting-style {
+    width: 0px;
     height: 0px;
     padding: 0px;
   }
 }
 
 .annotation.hidden .annotation-body {
+  width: 0px;
   height: 0px;
   padding: 0px;
   transition-delay: 0ms;
