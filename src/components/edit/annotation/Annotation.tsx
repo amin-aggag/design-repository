@@ -2,30 +2,10 @@ import { useLayoutEffect, useRef } from "react";
 import type { PointerEvent } from "react";
 import "./annotation.css";
 import { GripHorizontalIcon } from "../../icons/GripHorizontalIcon";
+import { clamp, fitHeightToContent, getMaxPosition } from "./annotationHelpers";
+import { useViewTransitionState } from "react-router";
 
 type Point = { x: number; y: number };
-
-function clamp(value: number, min: number, max: number) {
-  return Math.min(Math.max(value, min), max);
-}
-
-function getMaxPosition(annotation: HTMLElement | null) {
-  const container = annotation?.offsetParent as HTMLElement | null;
-  if (!annotation || !container) {
-    return { maxTop: Infinity, maxLeft: Infinity };
-  }
-
-  return {
-    maxTop: Math.max(container.clientHeight - annotation.offsetHeight, 0),
-    maxLeft: Math.max(container.clientWidth - annotation.offsetWidth, 0),
-  };
-}
-
-function fitHeightToContent(textarea: HTMLTextAreaElement) {
-  const { paddingTop, paddingBottom } = getComputedStyle(textarea);
-  textarea.style.height = "auto";
-  textarea.style.height = `${textarea.scrollHeight - parseFloat(paddingTop) - parseFloat(paddingBottom)}px`;
-}
 
 export type AnnotationPosition = {
   top: number;
@@ -46,6 +26,8 @@ type AnnotationProps = {
 type DragStart = { pointer: Point; position: AnnotationPosition };
 
 export function Annotation({ annotation, onMove }: AnnotationProps) {
+  const viewTransitionOccurring = useViewTransitionState("/edit");
+
   const annotationRef = useRef<HTMLDivElement>(null);
   const dragStartRef = useRef<DragStart | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -86,7 +68,7 @@ export function Annotation({ annotation, onMove }: AnnotationProps) {
 
   return (
     <div
-      className="annotation"
+      className={`annotation ${viewTransitionOccurring ? "with-view-transition" : ""}`}
       ref={annotationRef}
       style={{ top: annotation.position.top, left: annotation.position.left }}
     >

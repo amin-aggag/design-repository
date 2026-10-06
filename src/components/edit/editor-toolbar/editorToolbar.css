@@ -12,6 +12,7 @@
   flex-direction: row;
   justify-content: space-around;
   overflow: hidden;
+  user-select: none;
 }
 
 @keyframes slide-down {
