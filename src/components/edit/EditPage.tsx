@@ -4,9 +4,45 @@ import { SettingsIcon } from "../icons/SettingsIcon";
 import "./EditPage.css";
 import { Tag } from "./tags/Tag";
 import { EditorToolbar } from "./editor-toolbar/EditorToolbar";
-import { Annotation } from "./annotation/Annotation";
+import { Annotation, type AnnotationPosition } from "./annotation/Annotation";
+import React from "react";
 
 export function EditPage() {
+  const [annotations, setAnnotations] = React.useState<Annotation[]>([
+    {
+      id: "1",
+      text: `I like the simple squares that blend into the more detailed image as you look rightwards`,
+      position: {
+        top: 200,
+        left: 300
+      }
+    },
+    {
+      id: "2",
+      text: `I like the simple squares that blend into the more detailed image as you look rightwards`,
+      position: {
+        top: 500,
+        left: 500
+      }
+    },
+    {
+      id: "3",
+      text: `I like the simple squares that blend into the more detailed image as you look rightwards`,
+      position: {
+        top: 250,
+        left: 600
+      }
+    }
+  ]);
+
+  const moveAnnotation = (id: string, position: AnnotationPosition) => {
+    setAnnotations((prev) =>
+      prev.map((annotation) =>
+        annotation.id === id ? { ...annotation, position } : annotation
+      )
+    );
+  };
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,6 +58,7 @@ export function EditPage() {
     }
   };
 
+
   return (
     <div className="edit-page">
       <div className="edit-page-nav">
@@ -36,7 +73,13 @@ export function EditPage() {
       <div className="edit-page-content">
         <div className="annotate-image">
           <EditorToolbar />
-          <Annotation/>
+          {annotations.map((annotation) => (
+            <Annotation
+              key={annotation.id}
+              annotation={annotation}
+              onMove={(position) => moveAnnotation(annotation.id, position)}
+            />
+          ))}
           <img className="image" src="/image.png" />
         </div>
         <div className="image-info">
