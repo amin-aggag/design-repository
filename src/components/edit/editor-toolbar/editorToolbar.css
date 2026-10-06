@@ -1,0 +1,47 @@
+.editor-toolbar {
+  --height: 44px;
+  height: var(--height);
+  width: auto;
+  padding: 4px;
+  padding-inline: 12px;
+  background: hsl(from var(--secondary) h s 85%);
+  border-radius: calc(var(--height) / 2);
+  margin: 4px;
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  overflow: hidden;
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateY(-36px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.toolbar-icon {
+    height: 36px;
+  width: 36px;
+  padding: 6px;
+  border-radius: 50%;
+
+  transition: all 120ms ease-out;
+  animation: slide-down 400ms ease-out both;
+}
+
+.toolbar-icon:nth-child(2) {
+    animation-delay: 100ms;
+}
+
+.toolbar-icon:hover {
+  background: hsl(from var(--secondary) h s 80%);
+  cursor: pointer;
+}
+
+.toolbar-icon.selected {
+  background: hsl(from var(--secondary) h s 80%);
+}

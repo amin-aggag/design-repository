@@ -3,6 +3,8 @@ import { BackIcon } from "../icons/BackIcon";
 import { SettingsIcon } from "../icons/SettingsIcon";
 import "./EditPage.css";
 import { Tag } from "./tags/Tag";
+import { EditorToolbar } from "./editor-toolbar/EditorToolbar";
+import { Annotation } from "./annotation/Annotation";
 
 export function EditPage() {
   const navigate = useNavigate();
@@ -33,6 +35,8 @@ export function EditPage() {
       </div>
       <div className="edit-page-content">
         <div className="annotate-image">
+          <EditorToolbar />
+          <Annotation/>
           <img className="image" src="/image.png" />
         </div>
         <div className="image-info">
@@ -46,6 +50,11 @@ export function EditPage() {
               deleniti quidem ipsa atque iste praesentium quo autem natus quam?
               Similique ab deserunt architecto adipisci esse quasi error sed
               consequuntur a.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur ut quisquam distinctio! Atque quas repudiandae accusamus, possimus minima nisi repellat eveniet est laborum natus error provident dicta consequatur doloribus sit.
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa, quis saepe voluptas non alias quo ab eveniet maxime porro quibusdam, fugiat necessitatibus amet, consequuntur fugit excepturi veniam suscipit unde est.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, nisi. Quae ea hic quibusdam fugit doloremque maiores nesciunt maxime corporis, saepe aliquid voluptatibus consectetur tenetur alias repellat quo at suscipit.
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus iusto rerum eveniet explicabo quaerat omnis excepturi soluta neque, enim similique sapiente atque sed reprehenderit alias nesciunt placeat at ut ad.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus cumque in nihil vero harum. Sunt blanditiis aperiam dolorem atque distinctio sint, consequuntur dolorum perspiciatis ipsa, exercitationem similique impedit facere doloribus.
             </p>
             <div className="image-desc-tags">
               {["Pixelated", "Techy", "Green", "Grids", "Squares"].map((tag, index) => (
