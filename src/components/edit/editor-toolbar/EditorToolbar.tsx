@@ -1,18 +1,27 @@
 import { AddAnnotationIcon } from "../../icons/AddAnnotationIcon";
 import { EyeClosedIcon } from "../../icons/EyeClosedIcon";
+import { EyeOpenIcon } from "../../icons/EyeOpenIcon";
 import "./editorToolbar.css";
 
-export function EditorToolbar() {
-    return (
-        <div className="editor-toolbar">
-            <div className="toolbar-icon">
-                <AddAnnotationIcon />
-            </div>
-            <div className="toolbar-icon">
-                <EyeClosedIcon/>
-            </div>
+type EditorToolbarProps = {
+  toggleAddingMode: () => void;
+  toggleAnnotationView: () => void;
+  isViewingAnnotations: boolean;
+};
 
-            
-        </div>
-    )
+export function EditorToolbar({
+  toggleAddingMode,
+  toggleAnnotationView,
+  isViewingAnnotations,
+}: EditorToolbarProps) {
+  return (
+    <div className="editor-toolbar">
+      <div className="toolbar-icon" onClick={toggleAddingMode}>
+        <AddAnnotationIcon />
+      </div>
+      <div className="toolbar-icon" onClick={toggleAnnotationView}>
+        {isViewingAnnotations ? <EyeClosedIcon /> : <EyeOpenIcon />}
+      </div>
+    </div>
+  );
 }

@@ -34,6 +34,11 @@ export function EditPage() {
       }
     }
   ]);
+  const [isViewingAnnotations, setIsViewingAnnotations] = React.useState<boolean>(true);
+  const [isAddingModeOn, setIsAddingModeOn] = React.useState<boolean>(true);
+
+  const toggleAddingMode = () => setIsAddingModeOn((prev) => !prev);
+  const toggleAnnotationView = () => setIsViewingAnnotations((prev) => !prev);
 
   const moveAnnotation = (id: string, position: AnnotationPosition) => {
     setAnnotations((prev) =>
@@ -72,7 +77,7 @@ export function EditPage() {
       </div>
       <div className="edit-page-content">
         <div className="annotate-image">
-          <EditorToolbar />
+          <EditorToolbar toggleAddingMode={toggleAddingMode} toggleAnnotationView={toggleAnnotationView} isViewingAnnotations={isViewingAnnotations} />
           {annotations.map((annotation) => (
             <Annotation
               key={annotation.id}

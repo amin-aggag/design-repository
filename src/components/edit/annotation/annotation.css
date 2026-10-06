@@ -11,15 +11,9 @@
 }
 
 @keyframes animate-padding {
-    from {
-        padding: 0px;
-    }
-}
-
-@keyframes animate-overflow {
-    from {
-        overflow: hidden;
-    }
+  from {
+    padding: 0px;
+  }
 }
 
 .annotation {
@@ -40,6 +34,8 @@
   padding: 0;
   animation: animate-width 400ms ease-out both;
   animation-delay: 400ms;
+
+  box-shadow: 0px 1px 2px hsla(from var(--text) h s l / 0.2);
 }
 
 .annotation-handle:active {
@@ -48,15 +44,16 @@
 
 .annotation textarea {
   resize: none;
-  overflow: auto;
-  height: 190px;
-  width: 190px;
+  overflow: hidden;
+  box-sizing: content-box;
+  width: 158px;
   background: hsl(from var(--secondary) h s 80%);
   border-radius: 32px;
   padding: 16px;
   corner-shape: squircle;
   font-size: var(--fs-base);
-  animation: animate-height 400ms ease-out 800ms both, animate-padding 400ms ease-out 800ms both, animate-overflow 0ms ease-out 1200ms both;
-
-  scrollbar-color: hsla(from var(--secondary) h s l) transparent;
+  animation:
+    animate-height 400ms ease-out 800ms both,
+    animate-padding 400ms ease-out 800ms both;
+  box-shadow: 0px 1px 2px hsla(from var(--text) h s l / 0.2);
 }

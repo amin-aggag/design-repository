@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import type { PointerEvent } from "react";
 import "./annotation.css";
 import { GripHorizontalIcon } from "../../icons/GripHorizontalIcon";
@@ -19,6 +19,12 @@ function getMaxPosition(annotation: HTMLElement | null) {
     maxTop: Math.max(container.clientHeight - annotation.offsetHeight, 0),
     maxLeft: Math.max(container.clientWidth - annotation.offsetWidth, 0),
   };
+}
+
+function fitHeightToContent(textarea: HTMLTextAreaElement) {
+  const { paddingTop, paddingBottom } = getComputedStyle(textarea);
+  textarea.style.height = "auto";
+  textarea.style.height = `${textarea.scrollHeight - parseFloat(paddingTop) - parseFloat(paddingBottom)}px`;
 }
 
 export type AnnotationPosition = {
@@ -42,6 +48,15 @@ type DragStart = { pointer: Point; position: AnnotationPosition };
 export function Annotation({ annotation, onMove }: AnnotationProps) {
   const annotationRef = useRef<HTMLDivElement>(null);
   const dragStartRef = useRef<DragStart | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useLayoutEffect(() => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    fitHeightToContent(textarea);
+    document.fonts.ready.then(() => fitHeightToContent(textarea));
+  }, []);
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -84,7 +99,12 @@ export function Annotation({ annotation, onMove }: AnnotationProps) {
       >
         <GripHorizontalIcon />
       </div>
-      <textarea className="search-input" defaultValue={annotation.text} />
+      <textarea
+        className="search-input"
+        ref={textareaRef}
+        defaultValue={annotation.text}
+        onInput={(event) => fitHeightToContent(event.currentTarget)}
+      />
     </div>
   );
 }
