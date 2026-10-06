@@ -50,6 +50,8 @@
   --content-width: calc(var(--total-width) - 2 * var(--padding));
   interpolate-size: allow-keywords;
   display: grid;
+  justify-content: unsafe center;
+  margin-inline: auto;
   overflow: hidden;
   box-sizing: content-box;
   width: var(--content-width);
