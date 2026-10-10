@@ -39,6 +39,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 
 .annotate-image .image {

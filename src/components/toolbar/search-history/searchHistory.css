@@ -47,8 +47,7 @@
   background: hsl(from var(--secondary) h s 80%);
   height: 15px;
   width: 100%;
-  padding-left: 0px;
-  padding-right: 16px;
+  padding-inline: 24px;
   padding-block: 8px;
 
   border-radius: 16px;
@@ -132,4 +131,29 @@
       bottom: var(--expanded-bottom-wide-screen);
     }
   }
+}
+
+.up-icon-wrapper {
+  background: hsl(from var(--secondary) h s 80%);
+  width: 0px;
+  padding: 0px;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  top: 4px;
+  position: relative;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  corner-shape: squircle;
+  transition: all 180ms ease-out;
+
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+}
+
+.up-icon-wrapper.is-searching {
+  width: 40%;
+  padding: 4px;
 }
