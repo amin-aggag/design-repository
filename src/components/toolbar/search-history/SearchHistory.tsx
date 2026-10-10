@@ -13,11 +13,16 @@ export function SearchHistory() {
   const { isSearching, setSearchQuery } = useSearch();
 
   return (
-    <div className={`search-history-hover-zone ${isSearching ? "is-searching" : ""}`}>
+    <div
+      className={`search-history-hover-zone ${isSearching ? "is-searching" : ""}`}
+    >
       <div className={`up-icon-wrapper ${isSearching ? "is-searching" : ""}`}>
-        <HistoryIcon />
+        <ChevronUpIcon />
       </div>
       <div className="search-history">
+        <div className="history-icon">
+          <HistoryIcon />
+        </div>
         <div className="search-history-list">
           {exampleHistory.map((query) => (
             <div

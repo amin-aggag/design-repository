@@ -47,7 +47,8 @@
   background: hsl(from var(--secondary) h s 80%);
   height: 15px;
   width: 100%;
-  padding-inline: 24px;
+  padding-left: 0px;
+  padding-right: 24px;
   padding-block: 8px;
 
   border-radius: 16px;
@@ -140,12 +141,13 @@
   margin-inline: auto;
   display: flex;
   justify-content: center;
-  top: 4px;
+  top: 15px;
   position: relative;
   border-top-left-radius: 32px;
   border-top-right-radius: 32px;
   corner-shape: squircle;
   transition: all 180ms ease-out;
+  margin-inline: auto;
 
   svg {
     height: 24px;
@@ -153,7 +155,22 @@
   }
 }
 
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .up-icon-wrapper.is-searching {
-  width: 40%;
-  padding: 4px;
+  width: 10%;
+  padding: 1px;
+  top: 4px;
+  svg {
+    animation: slide-up 140ms ease-out 90ms both;
+  }
 }
