@@ -1,16 +1,13 @@
-import { useLayoutEffect, useRef } from "react";
-import type { PointerEvent } from "react";
+import { useRef } from "react";
+import type { CSSProperties } from "react";
 import "./annotation.css";
 import { GripHorizontalIcon } from "../../icons/GripHorizontalIcon";
-import { clamp, fitHeightToContent, getMaxPosition } from "./annotationHelpers";
+import { fitHeightToContent, type AnnotationPosition } from "./annotationHelpers";
+import { useAnnotationDrag } from "./useAnnotationDrag";
+import { useFitAnnotationText } from "./useFitAnnotationText";
 import { useParams, useViewTransitionState } from "react-router";
 
-type Point = { x: number; y: number };
-
-export type AnnotationPosition = {
-  top: number;
-  left: number;
-};
+export type { AnnotationPosition };
 
 export type Annotation = {
   id: string;
@@ -22,81 +19,59 @@ type AnnotationProps = {
   annotation: Annotation;
   onMove: (position: AnnotationPosition) => void;
   isVisible: boolean;
+  isWindowSizeTabletOrMobile: boolean;
+  isActive: boolean;
 };
 
-type DragStart = { pointer: Point; position: AnnotationPosition };
+function annotationClassName(isVisible: boolean, viewTransitionOccurring: boolean) {
+  return [
+    "annotation",
+    isVisible ? "" : "hidden",
+    viewTransitionOccurring ? "with-view-transition" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
 
-export function Annotation({ annotation, onMove, isVisible }: AnnotationProps) {
+function pinStyle(position: AnnotationPosition): CSSProperties {
+  return { "--x": position.x, "--y": position.y } as CSSProperties;
+}
+
+export function Annotation({
+  annotation,
+  onMove,
+  isVisible,
+  isWindowSizeTabletOrMobile,
+  isActive,
+}: AnnotationProps) {
   const { designId } = useParams();
   const viewTransitionOccurring = useViewTransitionState(`/edit/${designId}`);
-
-  const annotationRef = useRef<HTMLDivElement>(null);
-  const dragStartRef = useRef<DragStart | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const dragHandlers = useAnnotationDrag(annotation.position, onMove);
 
-  useLayoutEffect(() => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
-
-    fitHeightToContent(textarea);
-    document.fonts.ready.then(() => fitHeightToContent(textarea));
-  }, []);
-
-  useLayoutEffect(() => {
-    if (isVisible && textareaRef.current) {
-      fitHeightToContent(textareaRef.current);
-    }
-  }, [isVisible]);
-
-  const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
-    event.currentTarget.setPointerCapture(event.pointerId);
-    dragStartRef.current = {
-      pointer: { x: event.clientX, y: event.clientY },
-      position: annotation.position,
-    };
-  };
-
-  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
-    const dragStart = dragStartRef.current;
-    if (!dragStart) return;
-
-    const deltaX = event.clientX - dragStart.pointer.x;
-    const deltaY = event.clientY - dragStart.pointer.y;
-
-    const { maxTop, maxLeft } = getMaxPosition(annotationRef.current);
-    onMove({
-      top: clamp(dragStart.position.top + deltaY, 0, maxTop),
-      left: clamp(dragStart.position.left + deltaX, 0, maxLeft),
-    });
-  };
-
-  const handlePointerEnd = () => {
-    dragStartRef.current = null;
-  };
+  useFitAnnotationText(textareaRef, isVisible);
 
   return (
     <div
-      className={`annotation ${isVisible ? "" : "hidden"} ${viewTransitionOccurring ? "with-view-transition" : ""}`}
-      ref={annotationRef}
-      style={{ top: annotation.position.top, left: annotation.position.left }}
+      className={annotationClassName(isVisible, viewTransitionOccurring)}
+      style={pinStyle(annotation.position)}
     >
       <div
-        className="annotation-handle"
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerEnd}
-        onPointerCancel={handlePointerEnd}
+        className={`annotation-handle${isActive ? " is-active" : ""}`}
+        {...dragHandlers}
       >
         <GripHorizontalIcon />
       </div>
-      <div className="annotation-body">
-        <textarea
-          className="search-input"
-          ref={textareaRef}
-          defaultValue={annotation.text}
-          onInput={(event) => fitHeightToContent(event.currentTarget)}
-        />
-      </div>
+      {!isWindowSizeTabletOrMobile && (
+        <div className="annotation-body">
+          <textarea
+            className="search-input"
+            ref={textareaRef}
+            defaultValue={annotation.text}
+            onInput={(event) => fitHeightToContent(event.currentTarget)}
+          />
+        </div>
+      )}
     </div>
   );
 }

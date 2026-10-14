@@ -6,17 +6,19 @@ import "./editorToolbar.css";
 type EditorToolbarProps = {
   toggleAddingMode: () => void;
   toggleAnnotationView: () => void;
-  isViewingAnnotations: boolean;
+    isViewingAnnotations: boolean;
+    isAddingAnnotations: boolean;
 };
 
 export function EditorToolbar({
   toggleAddingMode,
   toggleAnnotationView,
-  isViewingAnnotations,
+    isViewingAnnotations,
+  isAddingAnnotations
 }: EditorToolbarProps) {
   return (
     <div className="editor-toolbar">
-      <div className="toolbar-icon" onClick={toggleAddingMode}>
+          <div className={`toolbar-icon ${isAddingAnnotations ? "selected" : ""}`} onClick={toggleAddingMode}>
         <AddAnnotationIcon />
       </div>
       <div className="toolbar-icon" onClick={toggleAnnotationView}>

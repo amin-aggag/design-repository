@@ -46,5 +46,5 @@
 }
 
 .toolbar-icon.selected {
-  background: hsl(from var(--secondary) h s 80%);
+  background: hsl(from var(--secondary) h s 75%);
 }

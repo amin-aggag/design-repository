@@ -1,8 +1,12 @@
 .annotation {
   --duration: 400ms;
-  --total-width: 190px;
+  --x: 0;
+  --y: 0;
   width: var(--total-width);
   position: absolute;
+  left: calc(var(--x) * 100% - var(--total-width) / 2);
+  top: calc(var(--y) * 100%);
+  pointer-events: auto;
   z-index: 1;
   transition: display calc(2 * var(--duration)) allow-discrete;
 }
@@ -43,6 +47,10 @@
 
 .annotation-handle:active {
   cursor: grabbing;
+}
+
+.annotation-handle.is-active {
+  outline: 2px solid yellow;
 }
 
 .annotation-body {

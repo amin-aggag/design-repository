@@ -1,0 +1,88 @@
+.annotate-image {
+  margin-inline: 16px;
+  border-radius: 32px;
+  corner-shape: squircle;
+  overflow: hidden;
+  background: hsla(from var(--primary) h s l / 5%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+}
+
+.image-stage {
+  flex: 1;
+  align-self: stretch;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  container-type: size;
+}
+
+.image-frame {
+  position: relative;
+  width: max-content;
+  height: max-content;
+  max-width: 100cqw;
+  max-height: 100cqh;
+}
+
+.annotation-layer {
+  --total-width: 190px;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.annotate-image .image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100cqw;
+  max-height: 100cqh;
+  view-transition-name: design-image;
+  transition: border-radius 80ms ease-out;
+  border-radius: 0px;
+}
+
+::view-transition-old(design-image),
+::view-transition-new(design-image) {
+  animation: none;
+  mix-blend-mode: normal;
+  overflow: clip;
+}
+
+::view-transition-old(design-image) {
+  animation: 100ms ease-out both design-image-fade-out;
+}
+
+::view-transition-image-pair(design-image) {
+  overflow: clip;
+  animation: design-image-radius 400ms ease both;
+}
+
+:root {
+  --start-radius: 0px;
+  --end-radius: 16px;
+}
+
+::view-transition-group(design-image) {
+  overflow: clip;
+  animation-duration: 400ms;
+}
+
+@keyframes design-image-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes design-image-radius {
+  from {
+    border-radius: var(--start-radius);
+  }
+  to {
+    border-radius: var(--end-radius);
+  }
+}
