@@ -4,6 +4,7 @@ import "./annotation.css";
 import { GripHorizontalIcon } from "../../icons/GripHorizontalIcon";
 import { fitHeightToContent, type AnnotationPosition } from "./annotationHelpers";
 import { useAnnotationDrag } from "./useAnnotationDrag";
+import { useClampAnnotationPin } from "./useClampAnnotationPin";
 import { useFitAnnotationText } from "./useFitAnnotationText";
 import { useParams, useViewTransitionState } from "react-router";
 
@@ -46,14 +47,17 @@ export function Annotation({
 }: AnnotationProps) {
   const { designId } = useParams();
   const viewTransitionOccurring = useViewTransitionState(`/edit/${designId}`);
+  const annotationRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const dragHandlers = useAnnotationDrag(annotation.position, onMove);
 
   useFitAnnotationText(textareaRef, isVisible);
+  useClampAnnotationPin(annotationRef, annotation.position, onMove, isVisible);
 
   return (
     <div
       className={annotationClassName(isVisible, viewTransitionOccurring)}
+      ref={annotationRef}
       style={pinStyle(annotation.position)}
     >
       <div

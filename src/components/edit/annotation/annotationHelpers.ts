@@ -1,6 +1,6 @@
 export type Point = { x: number; y: number };
 
-/** Handle pin as a fraction of the image's on-screen box, from its top-left. */
+/** x is the horizontal center and y is the top, as fractions of the rendered image. */
 export type AnnotationPosition = {
   x: number;
   y: number;
@@ -31,22 +31,43 @@ export function positionAfterDrag(
   dragStart: DragStart,
   pointer: Point,
   layer: HTMLElement,
+  annotation: HTMLElement,
 ): AnnotationPosition {
   const box = renderedBox(layer);
   if (box.width === 0 || box.height === 0) return dragStart.position;
 
+  return clampInsideLayer(
+    {
+      x: dragStart.position.x + (pointer.x - dragStart.pointer.x) / box.width,
+      y: dragStart.position.y + (pointer.y - dragStart.pointer.y) / box.height,
+    },
+    layer,
+    annotation,
+  );
+}
+
+/** Keeps the whole annotation inside the image. x is its horizontal center, y its top. */
+export function clampInsideLayer(
+  position: AnnotationPosition,
+  layer: HTMLElement,
+  annotation: HTMLElement,
+): AnnotationPosition {
+  const box = renderedBox(layer);
+  const { offsetWidth: width, offsetHeight: height } = annotation;
+  if (box.width === 0 || box.height === 0 || width === 0 || height === 0) return position;
+
+  const xInset = width / 2 / box.width;
+  const yLimit = height / box.height;
+
   return {
-    x: clamp(dragStart.position.x + (pointer.x - dragStart.pointer.x) / box.width, 0, 1),
-    y: clamp(dragStart.position.y + (pointer.y - dragStart.pointer.y) / box.height, 0, 1),
+    x: clamp(position.x, Math.min(xInset, 0.5), Math.max(1 - xInset, 0.5)),
+    y: clamp(position.y, 0, Math.max(1 - yLimit, 0)),
   };
 }
 
-export function annotationLayer(handle: HTMLElement) {
-  const annotation = handle.offsetParent;
-  if (!(annotation instanceof HTMLElement)) return null;
-
-  const layer = annotation.offsetParent;
-  return layer instanceof HTMLElement ? layer : null;
+export function positionedParent(element: HTMLElement) {
+  const parent = element.offsetParent;
+  return parent instanceof HTMLElement ? parent : null;
 }
 
 export function fitHeightToContent(textarea: HTMLTextAreaElement) {

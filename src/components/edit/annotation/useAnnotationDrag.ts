@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import type { PointerEvent } from "react";
 import {
-  annotationLayer,
   positionAfterDrag,
+  positionedParent,
   type AnnotationPosition,
   type Point,
 } from "./annotationHelpers";
@@ -25,11 +25,17 @@ export function useAnnotationDrag(
 
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
     const dragStart = dragStartRef.current;
-    const layer = annotationLayer(event.currentTarget);
-    if (!dragStart || !layer) return;
+    const annotation = positionedParent(event.currentTarget);
+    const layer = annotation && positionedParent(annotation);
+    if (!dragStart || !annotation || !layer) return;
 
     onMove(
-      positionAfterDrag(dragStart, { x: event.clientX, y: event.clientY }, layer),
+      positionAfterDrag(
+        dragStart,
+        { x: event.clientX, y: event.clientY },
+        layer,
+        annotation,
+      ),
     );
   };
 

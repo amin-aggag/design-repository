@@ -27,7 +27,7 @@
   touch-action: none;
   display: flex;
   padding: 0;
-  transition: width var(--duration) ease-out;
+  transition: width var(--duration) ease-out, background 80ms ease-out;
 
   box-shadow: 0px 1px 2px hsla(from var(--text) h s l / 0.2);
 
@@ -47,6 +47,8 @@
 
 .annotation-handle:active {
   cursor: grabbing;
+  width: 52px;
+  background: hsla(from var(--secondary) h s 68%);
 }
 
 .annotation-handle.is-active {
